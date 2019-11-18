@@ -13,6 +13,7 @@
 
 	$idPersonneModif = -1;		// positionné si demande de modification
 	$notification = 'rien';	// pour notifier la mise à jour dans la vue
+	$idPersonneNotif = -1; // positionné si mise à jour dans la vue
 
 	// selon l'action demandée on réalise l'action 
 	switch($action){
@@ -53,6 +54,13 @@
 		
 	// l' affichage des personnes se fait dans tous les cas
 	$tbPersonnes = $db->getLesPersonnes();
-	require 'vue/v_lesPersonnes.php';
+	//require 'vue/v_lesPersonnes.php';
+	echo $twig->render('lesPersonnes.html.twig', array(
+		'menuActif' => 'Jeux',
+		'tbPersonnes' => $tbPersonnes,
+		'idPersonneModif' => $idPersonneModif,
+		'idPersonneNotif' => $idPersonneNotif,
+		'notification' => $notification
+	));
 
 	?>
