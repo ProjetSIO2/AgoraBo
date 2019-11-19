@@ -49,8 +49,8 @@
                 'NomTournoi' => $_POST['txtNomTournoi'],
                 'Jeu' => $_POST['lstJeux'],
                 'Gain' => $_POST['txtGainTournoi'],
-                'Format' => $_POST['lstFormat'],
-                'Juge' => $_POST['lstJuge'],
+                'Format' => $_POST['lstFormats'],
+                'Juge' => $_POST['lstJuges'],
                 'Animateurs' => $_POST['lstAnimateurs'],
                 'Journees' => $tbJournees,
                 'Equipements' => $_POST['lstEquipements'],
@@ -75,7 +75,7 @@
 
             //Si aucune donnée ne manque on créé le tournoi
             if ((!empty($_POST['anneeTournoi'])) && (!empty($_POST['numTournoi'])) && (!empty($_POST['txtNomTournoi'])) && (!empty($_POST['lstJeux']))
-                && (!empty($_POST['txtGainTournoi'])) && (!empty($_POST['lstFormat'])) && (!empty($_POST['lstJuge']))
+                && (!empty($_POST['txtGainTournoi'])) && (!empty($_POST['lstFormats'])) && (!empty($_POST['lstJuges']))
                 && (!empty($_POST['lstAnimateurs'])) && (!empty($tbJournees)) && (!empty($_POST['lstEquipements'])) && (!empty($_POST['nbrParticipants']))) {
 
                 $objTournoi = (object)[
@@ -84,8 +84,8 @@
                     'NomTournoi' => $_POST['txtNomTournoi'],
                     'Jeu' => $_POST['lstJeux'],
                     'Gain' => $_POST['txtGainTournoi'],
-                    'Format' => $_POST['lstFormat'],
-                    'Juge' => $_POST['lstJuge'],
+                    'Format' => $_POST['lstFormats'],
+                    'Juge' => $_POST['lstJuges'],
                     'Animateurs' => $_POST['lstAnimateurs'],
                     'Journees' => $tbJournees,
                     'Equipements' => $_POST['lstEquipements'],
@@ -108,5 +108,15 @@
    $tbPersonnes = $db->getLesPersonnes_LA();
    $tbFormats = $db->getLesFormats();
    $tbTournois = $db->getLesTournois();
-   require "vue/v_lesTournois.php";
+   //require "vue/v_lesTournois.php";
+    echo $twig->render('lesTournois.html.twig', array(
+        'menuActif' => 'Jeux',
+        'tbEquipements' => $tbEquipements,
+        'tbJeux' => $tbJeux,
+        'tbPersonnes' => $tbPersonnes,
+        'tbFormats' => $tbFormats,
+        'tbTournois' => $tbTournois,
+        'objTournoi' => $objTournoi,
+        'affichage' => $affichage
+    ));
 ?>
