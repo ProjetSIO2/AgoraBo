@@ -10,7 +10,7 @@
 		// par défaut
 		$action = $_POST['cmdAction'];
 	}
-
+//
 	$idPersonneModif = -1;		// positionné si demande de modification
 	$notification = 'rien';	// pour notifier la mise à jour dans la vue
 	$idPersonneNotif = -1; // positionné si mise à jour dans la vue
