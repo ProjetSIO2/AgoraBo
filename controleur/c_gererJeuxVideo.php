@@ -54,7 +54,7 @@
 	$tbPegis  = $db->getLesPegis();
 	$tbMarques  = $db->getLesMarques();
 	// require 'vue/v_lesJeuxVideo.php';
-	echo $twig->render('lesPlateformes.html.twig', array(
+	echo $twig->render('lesJeuxVideo.html.twig', array(
 		'menuActif' => 'Jeux',
 		'tbJeuxViedo' => $tbJeuxVideo,
 		'tbGenres' => $tbGenres,

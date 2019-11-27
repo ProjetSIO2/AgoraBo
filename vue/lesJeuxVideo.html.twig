@@ -34,26 +34,20 @@
 						<input type="text" id="txtRefJeu" name="txtRefJeu" size="16" required minlength="4"  maxlength="16"  placeholder="Nouveau / Référence" title="De 4 à 16 caractères"  />
 					</td>
 					<td>
-
-
-						<?php
-							afficherListe($tbPlateformes, "lstPlateformes", "1", "");
-						?>
+						{% set tbObjets, name, size, idSelect = tbPlateformes, 'lstPlateformes', 1, "" %}
+						{{ include('liste.html.twig') }}
 					</td>
 					<td>
-						<?php
-							afficherListe($tbPegis, "lstPegis", "1", "");
-						?>
+						{% set tbObjets, name, size, idSelect = tbPegis, 'lstPegis', 1, "" %}
+						{{ include('liste.html.twig') }}
 					</td>
 					<td>
-						<?php
-							afficherListe($tbGenres, "lstGenres", "1", "");
-						?>
+						{% set tbObjets, name, size, idSelect = tbGenres, 'lstGenres', 1, "" %}
+						{{ include('liste.html.twig') }}
 					</td>
 					<td>
-						<?php
-							afficherListe($tbMarques, "lstMarques", "1", "");
-						?>
+						{% set tbObjets, name, size, idSelect = tbMarques, 'lstMarques', 1, "" %}
+						{{ include('liste.html.twig') }}
 					</td>
 					<td>
 						<input type="text" id="txtNom" name="txtNom" size="24" required minlength="1"  maxlength="50"  placeholder="Nom" title="De 1 à 50 caractères"  />
@@ -82,7 +76,7 @@
 							<td>{{jeuVideo.libMarque}}</td>
 							<td>{{jeuVideo.nom}}</td>
 							<td>{{jeuVideo.prix}}</td>
-							<td>{{jeuVideo.dateP}}</td>
+							<td>{{jeuVideo.dateParution}}</td>
 							<td>
 								{% if notification != 'rien' and jeuVideo.reference == refJeuNodif %}
 									<button class="btn btn-success btn-xs"><i class="fa fa-check"></i>{{ notification}}</button>'; 
@@ -91,33 +85,29 @@
 								<button class="btn btn-danger btn-xs" type="submit" name="cmdAction" value="supprimerJeuVideo" title="Supprimer" onclick="return confirm('Voulez-vous vraiment supprimer ce jeu vidéo ?');"><i class="fa fa-trash-o "></i></button>
 							</td>
 						{% else %}
-								{% set tbObjets, name, size, idSelect = tbFormats, 'lstFormats', 1, '' %}
+								{% set tbObjets, name, size, idSelect = tbPlateformes, 'lstPlateformes', 1, jeuVideo.idPlateforme %}
                                 {{ include('liste.html.twig') }}
-								afficherListe($tbPlateformes, "lstPlateformes", "1", $jeuVideo->idPlateforme);
 							</td>
 							<td>
-								<?php
-									afficherListe($tbPegis, "lstPegis", "1", $jeuVideo->idPegi);
-								?>
+								{% set tbObjets, name, size, idSelect = tbPegis, 'lstPegis', 1, jeuVideo.idPegi %}
+                                {{ include('liste.html.twig') }}
 							</td>
 							<td>
-								<?php
-									afficherListe($tbGenres, "lstGenres", "1", $jeuVideo->idGenre);
-								?>
+								{% set tbObjets, name, size, idSelect = tbGenres, 'lstGenres', 1, jeuVideo.idGenre %}
+                                {{ include('liste.html.twig') }}
 							</td>
 							<td>
-								<?php
-									afficherListe($tbMarques, "lstMarques", "1", $jeuVideo->idMarque);
-								?>
+								{% set tbObjets, name, size, idSelect = tbMarques, 'lstMarques', 1, jeuVideo.idMarque %}
+                                {{ include('liste.html.twig') }}
 							</td>
 							<td>
-								<input type="text" id="txtNom" name="txtNom" size="24" required minlength="1"  maxlength="50"  value="{{jeuVideo->nom; ?>}}"  />
+								<input type="text" id="txtNom" name="txtNom" size="24" required minlength="1"  maxlength="50"  value="{{ jeuVideo.nom }}"  />
 							</td>
 							<td>
-								<input type="text" id="txtPrix" name="txtPrix" size="24" required minlength="1"  maxlength="5"  value="{{jeuVideo->prix; ?>}}"  />
+								<input type="text" id="txtPrix" name="txtPrix" size="24" required minlength="1"  maxlength="5"  value="{{ jeuVideo.prix }}"  />
 							</td>
 							<td>
-								<input type="date" id="txtDateParution" name="txtDateParution" value="{{jeuVideo->dateP; ?>}}" />
+								<input type="date" id="txtDateParution" name="txtDateParution" value="{{ jeuVideo.dateParution }}" />
 							</td>
 							<td>		 
 								<button class="btn btn-primary btn-xs" type="submit" name="cmdAction" value="validerModifierJeuVideo" title="Enregistrer"><i class="fa fa-save"></i></button>
