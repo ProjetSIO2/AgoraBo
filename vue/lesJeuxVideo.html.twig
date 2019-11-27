@@ -71,36 +71,29 @@
 				</form>
 				</tr>
 				{% for key, jeuVideo in tbJeuxVideo %}
-				<?php
-				foreach ($tbJeuxVideo as $jeuVideo) { 
-				?>
 				  <tr>
-				  
 					<!-- formulaire pour modifier et supprimer les jeux vidéo-->
 					<form action="index.php?uc=gererJeuxVideo" method="post">
-					<td><?php echo $jeuVideo->reference; ?><input type="hidden"  name="txtRefJeu" value="<?php echo $jeuVideo->reference; ?>" /></td>
-					<td><?php 
-						if ($jeuVideo->reference != $refJeuModif) {
-							echo $jeuVideo->libPlateforme; ?></td>
-							<td><?php echo $jeuVideo->libPegi; ?></td>
-							<td><?php echo $jeuVideo->libGenre; ?></td>
-							<td><?php echo $jeuVideo->libMarque; ?></td>
-							<td><?php echo $jeuVideo->nom; ?></td>
-							<td><?php echo $jeuVideo->prix; ?></td>
-							<td><?php echo $jeuVideo->dateP; ?></td>
+					<td>{{ jeuVideo.reference }}<input type="hidden"  name="txtRefJeu" value="{{ jeuVideo.reference }}" /></td>
+					<td>{% if jeuVideo.reference != refJeuModif %}
+							{{ jeuVideo.libPlateforme }}</td>
+							<td>{{ jeuVideo.libPegi}}</td>
+							<td>{{ jeuVideo.libGenre }}</td>
+							<td>{{jeuVideo.libMarque}}</td>
+							<td>{{jeuVideo.nom}}</td>
+							<td>{{jeuVideo.prix}}</td>
+							<td>{{jeuVideo.dateP}}</td>
 							<td>
-								<?php if ($notification != 'rien' && $jeuVideo->reference == $refJeuNotif) {  
-									echo '<button class="btn btn-success btn-xs"><i class="fa fa-check"></i>'.$notification.'</button>'; 
-								
-								} ?>
+								{% if notification != 'rien' and jeuVideo.reference == refJeuNodif %}
+									<button class="btn btn-success btn-xs"><i class="fa fa-check"></i>{{ notification}}</button>'; 
+								{% endif %}
 								<button class="btn btn-primary btn-xs" type="submit" name="cmdAction" value="demanderModifierJeuVideo" title="Modifier"><i class="fa fa-pencil"></i></button>
 								<button class="btn btn-danger btn-xs" type="submit" name="cmdAction" value="supprimerJeuVideo" title="Supprimer" onclick="return confirm('Voulez-vous vraiment supprimer ce jeu vidéo ?');"><i class="fa fa-trash-o "></i></button>
 							</td>
-						<?php
-						}
-						else {
-							afficherListe($tbPlateformes, "lstPlateformes", "1", $jeuVideo->idPlateforme);
-							?>
+						{% else %}
+								{% set tbObjets, name, size, idSelect = tbFormats, 'lstFormats', 1, '' %}
+                                {{ include('liste.html.twig') }}
+								afficherListe($tbPlateformes, "lstPlateformes", "1", $jeuVideo->idPlateforme);
 							</td>
 							<td>
 								<?php
@@ -118,22 +111,20 @@
 								?>
 							</td>
 							<td>
-								<input type="text" id="txtNom" name="txtNom" size="24" required minlength="1"  maxlength="50"  value="<?php echo $jeuVideo->nom; ?>"  />
+								<input type="text" id="txtNom" name="txtNom" size="24" required minlength="1"  maxlength="50"  value="{{jeuVideo->nom; ?>}}"  />
 							</td>
 							<td>
-								<input type="text" id="txtPrix" name="txtPrix" size="24" required minlength="1"  maxlength="5"  value="<?php echo $jeuVideo->prix; ?>"  />
+								<input type="text" id="txtPrix" name="txtPrix" size="24" required minlength="1"  maxlength="5"  value="{{jeuVideo->prix; ?>}}"  />
 							</td>
 							<td>
-								<input type="date" id="txtDateParution" name="txtDateParution" value="<?php echo $jeuVideo->dateP; ?>" />
+								<input type="date" id="txtDateParution" name="txtDateParution" value="{{jeuVideo->dateP; ?>}}" />
 							</td>
 							<td>		 
 								<button class="btn btn-primary btn-xs" type="submit" name="cmdAction" value="validerModifierJeuVideo" title="Enregistrer"><i class="fa fa-save"></i></button>
 								<button class="btn btn-info btn-xs" type="reset" title="Effacer la saisie"><i class="fa fa-eraser"></i></button>				
 								<button class="btn btn-warning btn-xs" type="submit" name="cmdAction" value="annulerModifierJeuVideo" title="Annuler"><i class="fa fa-undo"></i></button>
 							</td>				
-						<?php
-						}				
-						?>
+						{% endif %}
 					</form>
 					
 				  </tr>  

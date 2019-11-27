@@ -60,7 +60,10 @@
 		'tbGenres' => $tbGenres,
 		'tbPlateformes' => $tbPlateformes,
 		'tbMarques' => $tbMarques,
-		'tbPegis' => $tbPegis
+		'tbPegis' => $tbPegis, 
+		'refJeuNotif' => $refJeuNotif,
+		'refJeuModif' => $refJeuModif,
+		'notification' => $notification
 	));
 
 	?>
